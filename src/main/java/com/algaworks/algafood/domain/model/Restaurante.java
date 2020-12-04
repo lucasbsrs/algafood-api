@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor
 @Entity
 public class Restaurante {
 
@@ -21,5 +20,8 @@ public class Restaurante {
     private String nome;
 
     private BigDecimal taxaFrete;
+
+    @ManyToOne
+    private Cozinha cozinha;
 
 }
