@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@JsonRootName("gastronomia")
+@JsonRootName("cozinha")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor
 @Entity
 public class Cozinha {
 
