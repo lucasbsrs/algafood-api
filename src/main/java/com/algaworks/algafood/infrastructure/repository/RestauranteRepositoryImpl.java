@@ -8,6 +8,8 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,19 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
         TypedQuery<Restaurante> query = entityManager.createQuery(jpql.toString(), Restaurante.class);
 
         parametros.forEach((chave, valor) -> query.setParameter(chave, valor));
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Restaurante> findCriteria(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
+        criteria.from(Restaurante.class);
+
+        TypedQuery<Restaurante> query = entityManager.createQuery(criteria);
 
         return query.getResultList();
     }
