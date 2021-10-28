@@ -9,11 +9,14 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 
-public class RestauranteComFreteGratisSpec implements Specification<Restaurante> {
+public class RestauranteSpecs  {
 
-    @Override
-    public Predicate toPredicate(Root<Restaurante> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-        return criteriaBuilder.equal(root.get("taxaFrete"), BigDecimal.ZERO);
+    public static Specification<Restaurante> comFreteGratis() {
+        return (root, query, builder) -> builder.equal(root.get("taxaFrete"), BigDecimal.ZERO);
+    }
+
+    public static Specification<Restaurante> comNomeSemelhante(String nome) {
+        return (root, query, builder) -> builder.like(root.get("nome"), "%" + nome + "%");
     }
 
 }
